@@ -38,5 +38,6 @@
     <string name="options_toast_upload_failure">pload Failure.(Please Check Your Network
 		Connection!)</string>
     <string name="tips_text"> AGILE BUDDY is a type of action game, which is operated by making use of a mobile phone\'s gravitational sensor.\n\n- Tilt the phone left or right to control the ROLE moving left or right. The more angle in the tilt, the faster the ROLE moves.\n\n- Avoid touching the spike or the ROLE will lose its lifespan. When the lifespan runs out, the game is over.\n\n- Avoid dropping the ROLE on the bottom of screen or the game is over.\n\n- The scores of the game will be decided by a combination of the times the ROLE contacts the footboards and the level of game rating. You can post your records to our global ranking server. We all hope to see your name in the top 25!</string>
+    <string name="feedback">Feedback</string>
 
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg_game"
@@ -7,64 +8,57 @@
     android:paddingTop="5dip" >
 
     <LinearLayout
+        android:id="@+id/AdLinearLayout"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
 
-            <TableLayout
-                android:id="@+id/tableLayout1"
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/start_game"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" >
+                android:background="@anim/mainbtn1"
+                android:text="@string/start_game" />
 
-                <TableRow
-                    android:id="@+id/tableRow1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+            <Button
+                android:id="@+id/options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@anim/mainbtn2"
+                android:text="@string/options" />
+        </TableRow>
 
-                    <Button
-                        android:id="@+id/start_game"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@anim/mainbtn1"
-                        android:text="@string/start_game" />
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
-                    <Button
-                        android:id="@+id/options"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@anim/mainbtn2"
-                        android:text="@string/options" />
-                </TableRow>
+            <Button
+                android:id="@+id/more_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@anim/mainbtn4"
+                android:text="@string/more_app" />
 
-                <TableRow
-                    android:id="@+id/tableRow2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+            <Button
+                android:id="@+id/exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@anim/mainbtn3"
+                android:text="@string/exit" />
+        </TableRow>
+    </TableLayout>
 
-                    <Button
-                        android:id="@+id/more_app"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@anim/mainbtn4"
-                        android:text="@string/more_app" />
-
-                    <Button
-                        android:id="@+id/exit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@anim/mainbtn3"
-                        android:text="@string/exit" />
-                </TableRow>
-            </TableLayout>
-        </RelativeLayout>
-    </LinearLayout>
-
-</FrameLayout>
+</RelativeLayout>

@@ -4,6 +4,12 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:id="@+id/AdLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
     <com.aven.boyrun.AgileBuddyView
         android:id="@+id/agile_buddy"
         android:layout_width="fill_parent"

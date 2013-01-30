@@ -16,37 +16,34 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+import cn.waps.AdView;
+import cn.waps.AppConnect;
 
 import com.aven.boyrun.util.ConstantInfo;
 import com.flurry.android.FlurryAgent;
-import com.waps.AppConnect;
 
-/**
- * 
- * @author void1898@gmail.com 本游戏原型为AgileBuddy，这里进行的修改操作仅为学习研究之用
- * @author iamavenwu@gmail.com
- * 
- */
-public class Menu extends Activity implements OnClickListener {
+public class MenuActivity extends Activity implements OnClickListener {
 
     @Override
     protected void onStart() {
         super.onStart();
         FlurryAgent.onStartSession(this, ConstantInfo.FLURRY_API_KEYSTRING);
+        AppConnect.getInstance(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         FlurryAgent.onEndSession(this);
-        FlurryAgent.logEvent("User start game");
-        
+        AppConnect.getInstance(this).finalize();
     }
 
     private SharedPreferences mBaseSettings;//
@@ -66,21 +63,21 @@ public class Menu extends Activity implements OnClickListener {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // 设置布局页面
         setContentView(R.layout.splash);
-        AppConnect.getInstance(this);
         initBtn();
         // 绑定srevice服务，ScoreUpgrateService
         Intent bindIntent = new Intent(this, ScoreUpgrateService.class);
         bindService(bindIntent, mConnection, Context.BIND_AUTO_CREATE);
         // 不指定名称，获取操作默认应用配置信息存储xml文件的SharedPreferences
         mBaseSettings = PreferenceManager.getDefaultSharedPreferences(this);
-        
+
     }
 
     /**
      * 初始化按钮绑定与监听
      */
     public void initBtn() {
-
+        LinearLayout container =(LinearLayout)findViewById(R.id.AdLinearLayout);
+        new AdView(this,container).DisplayAd();
         final Button start_game = (Button) findViewById(R.id.start_game);
         final Button more_app = (Button) findViewById(R.id.more_app);
         final Button options = (Button) findViewById(R.id.options);
@@ -114,6 +111,8 @@ public class Menu extends Activity implements OnClickListener {
         Intent i = null;
         switch (v.getId()) {// 开始游戏
         case R.id.start_game:
+            FlurryAgent.logEvent("start clicked");
+            Log.i("Menu", "start game clicked");
             // 首先获取shareprefence的配置信息，判断是否开启“显示按键提示”功能
             if (mBaseSettings.getBoolean(ConstantInfo.PREFERENCE_KEY_SHOWTIPS, true)) {// TipsActivity中简单介绍游戏，下方有开始游戏按钮，启用AgileBuddyActivity
                 i = new Intent(this, TipsActivity.class);
@@ -123,6 +122,8 @@ public class Menu extends Activity implements OnClickListener {
             break;
         // 设置选项
         case R.id.options:
+            FlurryAgent.logEvent("Option clicked");
+            Log.i("Menu", "option clicked");
             i = new Intent(this, Prefs.class);
             break;
         // 积分栏选项
@@ -131,12 +132,14 @@ public class Menu extends Activity implements OnClickListener {
         // break;
         // 更多推荐选项
         case R.id.more_app:
-            Toast.makeText(Menu.this, "暂不提供", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MenuActivity.this, "暂不提供", Toast.LENGTH_SHORT).show();
             // i = new Intent(Intent.ACTION_VIEW,
             // Uri.parse("market://search?q=pub:\"void1898\""));
             break;
         // 退出
         case R.id.exit:
+            FlurryAgent.logEvent("exit clicked");
+            Log.i("Menu", "exit clicked");
             finish();// 会重写
             return;
         }
@@ -148,13 +151,12 @@ public class Menu extends Activity implements OnClickListener {
     @Override
     public void finish() {
         this.unbindService(mConnection);
-        AppConnect.getInstance(this).finalize();
         super.finish();
     }
 
     @Override
     public void onBackPressed() {
-        Builder builder = new Builder(Menu.this);
+        Builder builder = new Builder(MenuActivity.this);
 
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {

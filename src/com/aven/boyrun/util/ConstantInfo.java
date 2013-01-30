@@ -22,6 +22,6 @@ public interface ConstantInfo {
     public static final String PREFERENCE_KEY_RANKING_SCORE = "org.void1898.agilebuddy.ranking.score";
     public static final String PREFERENCE_KEY_RANKING_DATE = "org.void1898.agilebuddy.ranking.date";
     public static final String PREFERENCE_KEY_RANKING_FLAG = "org.void1898.agilebuddy.ranking.flag";
-    public static final String FLURRY_API_KEYSTRING = "K8RFN4D2F2WSMNSSRDSS";
+    public static final String FLURRY_API_KEYSTRING = "X4B4VSMHDCFD4CNSWXM9";
 
 }
